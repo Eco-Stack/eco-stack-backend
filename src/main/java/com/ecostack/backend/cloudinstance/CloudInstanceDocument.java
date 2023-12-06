@@ -9,15 +9,12 @@ import java.util.List;
 
 @Builder
 @Getter
-@Document(collection = "instance")
+@Document(collection = "CloudInstance")
 public class CloudInstanceDocument {
 
     @Id
     private String id;
-    private List<String> cpuCoreMetricIds;
-    private List<String> cpuUsageMetricIds;
-    private List<String> memoryUsageInBytesMetricIds;
+    private List<String> cpuUtilizationMetricIds;
+    private List<String> memoryUtilizationMetricIds;
     private List<String> diskUsageMetricIds;
-    private List<String> networkInputMetricIds;
-    private List<String> networkOutputMetricIds;
 }

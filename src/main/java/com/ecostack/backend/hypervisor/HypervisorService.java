@@ -21,26 +21,26 @@ public class HypervisorService {
 
     public HypervisorOverviewDto getOverview() {
 
-        List<HypervisorDocument> hypervisorDocuments = hypervisorRepository.findAll();
+        List<Hypervisor> hypervisors = hypervisorRepository.findAll();
         List<HypervisorMetricDto> cpuUsageAverageMetrics = new ArrayList<>();
         List<HypervisorMetricDto> memoryUsageAverageInBytesMetrics = new ArrayList<>();
         List<HypervisorMetricDto> diskUsageAverageMetrics = new ArrayList<>();
 
-        for(HypervisorDocument hypervisorDocument : hypervisorDocuments) {
+        for(Hypervisor hypervisor : hypervisors) {
             //Hypervisor 마다 Metric 값들
             cpuUsageAverageMetrics.add(HypervisorMetricDto.builder()
-                    .hypervisorName(hypervisorDocument.getName())
-                    .metric(calCpuUsageAverage(hypervisorDocument))
+                    .hypervisorName(hypervisor.getName())
+                    .metric(calCpuUsageAverage(hypervisor))
                     .build());
 
             memoryUsageAverageInBytesMetrics.add(HypervisorMetricDto.builder()
-                    .hypervisorName(hypervisorDocument.getName())
-                    .metric(calMemoryUsageInBytesAverage(hypervisorDocument))
+                    .hypervisorName(hypervisor.getName())
+                    .metric(calMemoryUsageInBytesAverage(hypervisor))
                     .build());
 
             diskUsageAverageMetrics.add(HypervisorMetricDto.builder()
-                    .hypervisorName(hypervisorDocument.getName())
-                    .metric(calDiskUsageAverage(hypervisorDocument))
+                    .hypervisorName(hypervisor.getName())
+                    .metric(calDiskUsageAverage(hypervisor))
                     .build());
         }
 
@@ -56,27 +56,27 @@ public class HypervisorService {
                 .build();
     }
 
-    public double calCpuUsageAverage(HypervisorDocument hypervisorDocument) {
+    public double calCpuUsageAverage(Hypervisor hypervisor) {
 
-        return  hypervisorDocument.getCloudInstanceIds().stream()
+        return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUsageMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }
 
-    public double calMemoryUsageInBytesAverage(HypervisorDocument hypervisorDocument) {
+    public double calMemoryUsageInBytesAverage(Hypervisor hypervisor) {
 
-        return  hypervisorDocument.getCloudInstanceIds().stream()
+        return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUsageInBytesMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }
 
-    public double calDiskUsageAverage(HypervisorDocument hypervisorDocument) {
+    public double calDiskUsageAverage(Hypervisor hypervisor) {
 
-        return  hypervisorDocument.getCloudInstanceIds().stream()
+        return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
                 .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUsageMetricIds()))
                 .average()

@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @Getter
 @ToString
-@Document(collection = "project")
+@Document(collection = "CloudProject")
 public class ProjectDocument {
 
     @Id

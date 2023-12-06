@@ -1,7 +1,7 @@
 package com.ecostack.backend.cloudinstance;
 
 import com.ecostack.backend.cloudinstance.dto.CloudInstanceMetric;
-import com.ecostack.backend.metric.MetricDocument;
+import com.ecostack.backend.metric.Metric;
 import com.ecostack.backend.metric.MetricRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,9 +25,9 @@ public class CloudInstanceService {
         double metricsAverage = 0;
 
         for(String metricId : metricIds) {
-            MetricDocument metricDocument = metricRepository.findById(metricId).orElseThrow();
+            Metric metric = metricRepository.findById(metricId).orElseThrow();
 
-            metricsAverage += metricDocument.getMetrics().getAverage();
+            metricsAverage += metric.getMetricValues().getAverage();
         }
 
         return metricsAverage/metricIds.size();

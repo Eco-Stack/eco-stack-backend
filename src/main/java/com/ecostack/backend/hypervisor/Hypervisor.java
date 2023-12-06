@@ -1,21 +1,19 @@
-package com.ecostack.backend.metric;
+package com.ecostack.backend.hypervisor;
 
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
-@Document(collection = "metric")
-public class MetricDocument {
+@Document(collection = "Hypervisor")
+public class Hypervisor {
 
     @Id
     private String id;
-    private String instanceId;
     private String name;
-    private LocalDateTime dateTime;
-    private Metrics metrics;
+    private List<String> cloudInstanceIds;
 }

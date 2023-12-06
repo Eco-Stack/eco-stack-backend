@@ -44,9 +44,9 @@ public class ProjectService {
              CloudInstanceDocument cloudInstanceDocument = cloudInstanceRepository.findById(instanceId).orElseThrow();
 
              double cpuCore = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuCoreMetricIds());
-             double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUsageMetricIds());
+             double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds());
              double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUsageMetricIds());
-             double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUsageInBytesMetricIds());
+             double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds());
 
              CloudInstanceDto cloudInstanceDto = CloudInstanceDto.builder()
                      .id(cloudInstanceDocument.getId())
