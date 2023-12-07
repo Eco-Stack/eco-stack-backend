@@ -26,9 +26,9 @@ public class CloudProjectController {
         return ResponseEntity.ok(cloudProjectService.getProjectDashboard(projectId));
     }
 
-    @GetMapping("/v1/projects/{projectId}/outlines")
-    public CloudProjectOutlineDto getOutline(@PathVariable String projectId) {
-        return cloudProjectService.getProjectOutline(projectId);
+    @GetMapping("/v1/projects/outlines")
+    public CloudProjectOutlineDto getOutline() {
+        return cloudProjectService.getProjectOutline();
     }
 }
 

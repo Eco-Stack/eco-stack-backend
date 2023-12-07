@@ -37,7 +37,7 @@ public class CloudProjectService {
                 .build();
     }
 
-    public CloudProjectOutlineDto getProjectOutline(String projectId) {
+    public CloudProjectOutlineDto getProjectOutline() {
         List<CloudProject> cloudProjects = cloudProjectRepository.findAll();
         List<CloudProjectMetricDto> mostInstanceCntProject = calMostInstanceCntProjects(cloudProjects);
 
