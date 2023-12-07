@@ -2,7 +2,7 @@ package com.ecostack.backend.service;
 
 import com.ecostack.backend.model.CloudInstance;
 import com.ecostack.backend.repository.CloudInstanceRepository;
-import com.ecostack.backend.dto.cloudinstance.CloudInstanceMetricDto;
+import com.ecostack.backend.dto.cloudinstance.CloudInstanceGraphMetricDto;
 import com.ecostack.backend.model.MetricValues;
 import com.ecostack.backend.model.CloudInstanceMetric;
 import com.ecostack.backend.repository.CloudInstanceMetricRepository;
@@ -25,13 +25,13 @@ public class CloudInstanceService {
     private final HypervisorInstanceMetricRepository hypervisorInstanceMetricRepository;
     private final CloudInstanceRepository cloudInstanceRepository;
 
-    public CloudInstanceMetricDto getCloudInstanceMetricGraphFor(String cloudInstanceId, int days) {
+    public CloudInstanceGraphMetricDto getCloudInstanceMetricGraphFor(String cloudInstanceId, int days) {
         CloudInstance cloudInstance = cloudInstanceRepository.findById(cloudInstanceId).orElseThrow();
         List<MetricValues> cpuUtilizationMetrics = getCloudInstanceMetricFor(cloudInstance.getCpuUtilizationMetricIds(), days);
         List<MetricValues> memoryUtilizationMetrics = getCloudInstanceMetricFor(cloudInstance.getMemoryUtilizationMetricIds(), days);
 //        List<MetricValues> diskUtilizationMetrics = getCloudInstanceMetricFor(cloudInstance.getDiskUtilizationMetricIds(), days);
 
-        return CloudInstanceMetricDto.builder()
+        return CloudInstanceGraphMetricDto.builder()
                 .cpuUtilizationMetricValues(cpuUtilizationMetrics)
                 .memoryUtilizationMetricValues(memoryUtilizationMetrics)
                 .build();

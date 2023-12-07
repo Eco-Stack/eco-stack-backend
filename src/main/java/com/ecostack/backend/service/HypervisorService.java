@@ -1,6 +1,5 @@
 package com.ecostack.backend.service;
 
-import com.ecostack.backend.dto.cloudinstance.CloudInstanceMetricDto;
 import com.ecostack.backend.dto.hypervisor.HypervisorGraphMetricDto;
 import com.ecostack.backend.model.*;
 import com.ecostack.backend.repository.CloudInstanceRepository;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public class CloudInstanceMetricDto {
+public class CloudInstanceGraphMetricDto {
     List<MetricValues> cpuUtilizationMetricValues;
     List<MetricValues> memoryUtilizationMetricValues;
     List<MetricValues> diskUtilizationMetricValues;
