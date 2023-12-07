@@ -1,17 +1,16 @@
 package com.ecostack.backend.service;
 
-import com.ecostack.backend.model.CloudInstance;
+import com.ecostack.backend.global.mapper.MetricValuesMapper;
+import com.ecostack.backend.model.*;
 import com.ecostack.backend.repository.CloudInstanceRepository;
 import com.ecostack.backend.dto.cloudinstance.CloudInstanceGraphMetricDto;
-import com.ecostack.backend.model.MetricValues;
-import com.ecostack.backend.model.CloudInstanceMetric;
 import com.ecostack.backend.repository.CloudInstanceMetricRepository;
-import com.ecostack.backend.model.HypervisorInstanceMetric;
 import com.ecostack.backend.repository.HypervisorInstanceMetricRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -32,8 +31,8 @@ public class CloudInstanceService {
 //        List<MetricValues> diskUtilizationMetrics = getCloudInstanceMetricFor(cloudInstance.getDiskUtilizationMetricIds(), days);
 
         return CloudInstanceGraphMetricDto.builder()
-                .cpuUtilizationMetricValues(cpuUtilizationMetrics)
-                .memoryUtilizationMetricValues(memoryUtilizationMetrics)
+                .cpuUtilizationMetricValues(MetricValuesMapper.INSTANCE.toMetricValuesDto(cpuUtilizationMetrics))
+                .memoryUtilizationMetricValues(MetricValuesMapper.INSTANCE.toMetricValuesDto(memoryUtilizationMetrics))
                 .build();
     }
 

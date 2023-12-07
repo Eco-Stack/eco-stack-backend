@@ -7,10 +7,10 @@ import lombok.ToString;
 import java.time.Instant;
 
 @ToString
-@Builder
 @Getter
+@Builder
 public class MetricValue {
 
     private Instant dateTime;
-    private Double value;
+    private double value;
 }
