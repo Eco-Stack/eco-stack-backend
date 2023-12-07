@@ -1,6 +1,7 @@
 package com.ecostack.backend.service;
 
 import com.ecostack.backend.dto.hypervisor.HypervisorGraphMetricDto;
+import com.ecostack.backend.global.mapper.MetricValuesMapper;
 import com.ecostack.backend.model.*;
 import com.ecostack.backend.repository.CloudInstanceRepository;
 import com.ecostack.backend.repository.HypervisorMetricRepository;
@@ -31,8 +32,8 @@ public class HypervisorService {
         List<MetricValues> memoryUtilizationMetrics = getHypervisorMetricFor(hypervisor.getMemoryUtilizationMetricIds(), days);
 
         return HypervisorGraphMetricDto.builder()
-                .cpuUtilizationMetricValues(cpuUtilizationMetrics)
-                .memoryUtilizationMetricValues(memoryUtilizationMetrics)
+                .cpuUtilizationMetricValues(MetricValuesMapper.INSTANCE.toMetricValuesDto(cpuUtilizationMetrics))
+                .memoryUtilizationMetricValues(MetricValuesMapper.INSTANCE.toMetricValuesDto(memoryUtilizationMetrics))
                 .build();
     }
 
