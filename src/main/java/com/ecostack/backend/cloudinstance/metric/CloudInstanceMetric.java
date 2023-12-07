@@ -17,7 +17,6 @@ public class CloudInstanceMetric {
 
     @Id
     private String id;
-    private String instanceId;
     private String name;
     private LocalDateTime dateTime;
     private MetricValues metricValues;
