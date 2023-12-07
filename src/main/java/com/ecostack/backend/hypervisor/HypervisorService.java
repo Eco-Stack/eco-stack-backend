@@ -19,7 +19,7 @@ public class HypervisorService {
     private final CloudInstanceRepository cloudInstanceRepository;
     private final CloudInstanceService cloudInstanceService;
 
-    public HypervisorOverviewDto getOverview() {
+    public HypervisorOverviewDto getOutline() {
 
         List<Hypervisor> hypervisors = hypervisorRepository.findAll();
         List<HypervisorMetricDto> cpuUsageAverageMetrics = new ArrayList<>();
