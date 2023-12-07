@@ -14,7 +14,7 @@ public class HypervisorController {
 
     private final HypervisorService hypervisorService;
 
-    @GetMapping("/v1/hypervisors/overviews")
+    @GetMapping("/v1/hypervisors/outlines")
     public ResponseEntity<HypervisorOverviewDto> getOutline() {
 
         return ResponseEntity.ok(hypervisorService.getOutline());

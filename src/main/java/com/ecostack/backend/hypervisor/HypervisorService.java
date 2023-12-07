@@ -18,6 +18,7 @@ public class HypervisorService {
     private final HypervisorRepository hypervisorRepository;
     private final CloudInstanceRepository cloudInstanceRepository;
     private final CloudInstanceService cloudInstanceService;
+    private final int MAX_HYPERVISORS_TO_SHOW = 10;
 
     public HypervisorOverviewDto getOutline() {
 
@@ -50,9 +51,9 @@ public class HypervisorService {
         diskUsageAverageMetrics.sort(Comparator.comparing(HypervisorMetricDto::getMetric).reversed());
 
         return HypervisorOverviewDto.builder()
-                .cpuUsageAverageMetrics(cpuUsageAverageMetrics)
-                .memoryUsageAverageMetrics(memoryUsageAverageInBytesMetrics)
-                .diskUsageAverageMetrics(diskUsageAverageMetrics)
+                .cpuUsageAverageMetrics(cpuUsageAverageMetrics.subList(0, Math.min(cpuUsageAverageMetrics.size(), MAX_HYPERVISORS_TO_SHOW)))
+                .memoryUsageAverageMetrics(memoryUsageAverageInBytesMetrics.subList(0, Math.min(memoryUsageAverageInBytesMetrics.size(), MAX_HYPERVISORS_TO_SHOW)))
+                .diskUsageAverageMetrics(diskUsageAverageMetrics.subList(0, Math.min(diskUsageAverageMetrics.size(), MAX_HYPERVISORS_TO_SHOW)))
                 .build();
     }
 
