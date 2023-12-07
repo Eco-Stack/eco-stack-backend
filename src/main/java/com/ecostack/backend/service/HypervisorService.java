@@ -60,16 +60,19 @@ public class HypervisorService {
         for(Hypervisor hypervisor : hypervisors) {
             //Hypervisor 마다 Metric 값들
             cpuUsageAverageMetrics.add(HypervisorMetricDto.builder()
+                    .id(hypervisor.getId())
                     .hypervisorName(hypervisor.getName())
                     .metric(calCpuUsageAverage(hypervisor))
                     .build());
 
             memoryUsageAverageInBytesMetrics.add(HypervisorMetricDto.builder()
+                    .id(hypervisor.getId())
                     .hypervisorName(hypervisor.getName())
                     .metric(calMemoryUsageInBytesAverage(hypervisor))
                     .build());
 
             diskUsageAverageMetrics.add(HypervisorMetricDto.builder()
+                    .id(hypervisor.getId())
                     .hypervisorName(hypervisor.getName())
                     .metric(calDiskUsageAverage(hypervisor))
                     .build());

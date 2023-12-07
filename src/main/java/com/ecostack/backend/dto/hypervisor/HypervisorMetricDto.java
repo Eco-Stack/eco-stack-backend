@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class HypervisorMetricDto {
+    String id;
     String hypervisorName;
     double metric;
 }
