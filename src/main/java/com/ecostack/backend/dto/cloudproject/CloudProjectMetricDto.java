@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class CloudProjectMetricDto {
 
+    private String id;
     private String name;
     private int value;
 }

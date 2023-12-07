@@ -58,6 +58,7 @@ public class CloudProjectService {
 
         for(CloudProject cloudProject : cloudProjects) {
             CloudProjectMetricDto cloudProjectMetricDto = CloudProjectMetricDto.builder()
+                    .id(cloudProject.getId())
                     .name(cloudProject.getName())
                     .value(cloudProject.getCloudInstanceIds().size())
                     .build();
@@ -96,6 +97,8 @@ public class CloudProjectService {
             memoryUtilizationAvg /= cloudInstanceCnt;
 
             CloudProjectResourceAvgDto cloudProjectResourceAvgDto = CloudProjectResourceAvgDto.builder()
+                    .id(cloudProject.getId())
+                    .name(cloudProject.getName())
                     .cpuUtilization(cpuUtilizationAvg)
                     .memoryUtilization(memoryUtilizationAvg)
                     .cloudInstanceCnt(cloudInstanceCnt)

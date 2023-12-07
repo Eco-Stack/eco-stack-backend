@@ -8,6 +8,7 @@ import lombok.Getter;
 public class CloudProjectResourceAvgDto {
 
     private String id;
+    private String name;
     private double cpuUtilization;
     private double memoryUtilization;
     private double cloudInstanceCnt;
