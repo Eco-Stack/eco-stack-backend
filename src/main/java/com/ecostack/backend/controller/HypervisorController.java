@@ -1,12 +1,12 @@
 package com.ecostack.backend.controller;
 
+import com.ecostack.backend.dto.cloudinstance.CloudInstanceMetricDto;
+import com.ecostack.backend.dto.hypervisor.HypervisorGraphMetricDto;
 import com.ecostack.backend.service.HypervisorService;
 import com.ecostack.backend.dto.hypervisor.HypervisorOverviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -19,5 +19,10 @@ public class HypervisorController {
     public ResponseEntity<HypervisorOverviewDto> getOutline() {
 
         return ResponseEntity.ok(hypervisorService.getOutline());
+    }
+
+    @GetMapping("/v1/hypervisors/{hypervisorId}")
+    public ResponseEntity<HypervisorGraphMetricDto> getMetricGraph(@PathVariable String hypervisorId, @RequestParam int days) {
+        return ResponseEntity.ok(hypervisorService.getMetricGraphFor(hypervisorId, days));
     }
 }
