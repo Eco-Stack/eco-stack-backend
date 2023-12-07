@@ -1,4 +1,4 @@
-package com.ecostack.backend.mapper;
+package com.ecostack.backend.global.mapper;
 
 import com.ecostack.backend.project.CloudProject;
 import com.ecostack.backend.project.dto.ProjectOverViewDto;

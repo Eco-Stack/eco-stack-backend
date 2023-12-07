@@ -1,13 +1,11 @@
 package com.ecostack.backend.repository;
 
-import com.ecostack.backend.cloudinstance.CloudInstance;
-import com.ecostack.backend.cloudinstance.CloudInstanceRepository;
+import com.ecostack.backend.model.CloudInstance;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
-import java.util.List;
 import java.util.Set;
 
 @DataMongoTest
