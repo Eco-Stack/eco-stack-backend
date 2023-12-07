@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -45,7 +43,6 @@ public class CloudProjectService {
          for(String instanceId : instanceIdList) {
 
              CloudInstance cloudInstance = cloudInstanceRepository.findById(instanceId).orElseThrow();
-             log.info(cloudInstance.toString());
              double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getCpuUtilizationMetricIds());
 //             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUtilizationMetricIds());
              double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstance.getMemoryUtilizationMetricIds());
@@ -60,7 +57,8 @@ public class CloudProjectService {
              cloudInstanceDtos.add(cloudInstanceDto);
          }
 
-        //TODO : Top10 기준 생성 -> 그 기준으로 정렬
+         //TODO : CPU 기준 내림차순
+         cloudInstanceDtos.sort(Comparator.comparing(CloudInstanceDto::getCpuUsage).reversed());
          return cloudInstanceDtos;
     }
 }
