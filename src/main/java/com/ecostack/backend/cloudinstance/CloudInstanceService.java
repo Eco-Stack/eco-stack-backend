@@ -2,10 +2,10 @@ package com.ecostack.backend.cloudinstance;
 
 import com.ecostack.backend.cloudinstance.dto.CloudInstanceMetricDto;
 import com.ecostack.backend.metric.MetricValues;
-import com.ecostack.backend.metric.cloudinstance.CloudInstanceMetric;
-import com.ecostack.backend.metric.cloudinstance.CloudInstanceMetricRepository;
-import com.ecostack.backend.metric.hypervisorInstanceMetric.HypervisorInstanceMetric;
-import com.ecostack.backend.metric.hypervisorInstanceMetric.HypervisorInstanceMetricRepository;
+import com.ecostack.backend.cloudinstance.metric.CloudInstanceMetric;
+import com.ecostack.backend.cloudinstance.metric.CloudInstanceMetricRepository;
+import com.ecostack.backend.cloudinstance.metric.HypervisorInstanceMetric;
+import com.ecostack.backend.cloudinstance.metric.HypervisorInstanceMetricRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

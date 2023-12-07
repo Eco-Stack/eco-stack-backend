@@ -1,4 +1,4 @@
-package com.ecostack.backend.metric.cloudinstance;
+package com.ecostack.backend.cloudinstance.metric;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

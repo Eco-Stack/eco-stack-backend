@@ -1,4 +1,4 @@
-package com.ecostack.backend.metric.cloudinstance;
+package com.ecostack.backend.cloudinstance.metric;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
