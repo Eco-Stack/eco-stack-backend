@@ -8,10 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @ToString
 @Builder
@@ -25,15 +22,15 @@ public class CloudInstance {
     private LocalDate createdDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
 
     @Builder.Default
-    private Set<String> hypervisorCpuUtilizationMetricIds = new HashSet<>();
+    private Set<String> hypervisorCpuUtilizationMetricIds = new LinkedHashSet<>();
     @Builder.Default
-    private Set<String> hypervisorMemoryUtilizationMetricIds = new HashSet<>();
+    private Set<String> hypervisorMemoryUtilizationMetricIds = new LinkedHashSet<>();
     @Builder.Default
-    private Set<String> cpuUtilizationMetricIds = new HashSet<>();;
+    private Set<String> cpuUtilizationMetricIds = new LinkedHashSet<>();
     @Builder.Default
-    private Set<String> memoryUtilizationMetricIds = new HashSet<>();;
+    private Set<String> memoryUtilizationMetricIds = new LinkedHashSet<>();
     @Builder.Default
-    private Set<String> diskUtilizationMetricIds = new HashSet<>();;
+    private Set<String> diskUtilizationMetricIds = new LinkedHashSet<>();
 
     public void addToHypervisorCpuUtilizationMetricIds(String metricId) {
         this.hypervisorCpuUtilizationMetricIds.add(metricId);
