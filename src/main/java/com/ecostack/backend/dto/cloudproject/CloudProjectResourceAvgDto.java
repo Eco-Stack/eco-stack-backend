@@ -11,5 +11,5 @@ public class CloudProjectResourceAvgDto {
     private String name;
     private double cpuUtilization;
     private double memoryUtilization;
-    private double cloudInstanceCnt;
+    private int cloudInstanceCnt;
 }
