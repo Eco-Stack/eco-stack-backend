@@ -1,5 +1,6 @@
 package com.ecostack.backend.project;
 
+import com.ecostack.backend.project.dto.CloudProjectOutlineDto;
 import com.ecostack.backend.project.dto.ProjectDashboardDto;
 import com.ecostack.backend.project.dto.ProjectOverViewDto;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,14 @@ public class CloudProjectController {
         return ResponseEntity.ok(cloudProjectService.getProjectOverview(projectId));
     }
 
-    @GetMapping("v1/projects/{projectId}/dashboards")
+    @GetMapping("/v1/projects/{projectId}/dashboards")
     public ResponseEntity<ProjectDashboardDto> getDashboard (@PathVariable String projectId) {
         return ResponseEntity.ok(cloudProjectService.getProjectDashboard(projectId));
+    }
+
+    @GetMapping("/v1/projects/{projectId}/outlines")
+    public CloudProjectOutlineDto getOutline(@PathVariable String projectId) {
+        return cloudProjectService.getProjectOutline(projectId);
     }
 }
 

@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -49,14 +48,12 @@ public class CloudInstanceService {
         return metricValuesForDays;
     }
 
-    public double calMetricsAverage(Set<String> metricIds) {
+    public double calCloudInstanceMetricsAverage(Set<String> metricIds) {
 
         double metricsAverage = 0;
 
         for(String metricId : metricIds) {
             CloudInstanceMetric cloudInstanceMetric = cloudInstanceMetricRepository.findById(metricId).orElseThrow();
-
-            log.info(cloudInstanceMetric.toString());
 
             metricsAverage += cloudInstanceMetric.getMetricValues().getAverage();
         }

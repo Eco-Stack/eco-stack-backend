@@ -60,7 +60,7 @@ public class HypervisorService {
 
         return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calCloudInstanceMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }
@@ -69,7 +69,7 @@ public class HypervisorService {
 
         return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calCloudInstanceMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }
@@ -78,7 +78,7 @@ public class HypervisorService {
 
         return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUtilizationMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calCloudInstanceMetricsAverage(cloudInstanceDocument.getDiskUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }
