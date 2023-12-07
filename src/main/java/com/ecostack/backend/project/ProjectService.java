@@ -43,14 +43,12 @@ public class ProjectService {
          for(String instanceId : instanceIdList) {
              CloudInstanceDocument cloudInstanceDocument = cloudInstanceRepository.findById(instanceId).orElseThrow();
 
-             double cpuCore = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuCoreMetricIds());
              double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds());
              double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUsageMetricIds());
              double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds());
 
              CloudInstanceDto cloudInstanceDto = CloudInstanceDto.builder()
                      .id(cloudInstanceDocument.getId())
-                     .cpuCore(cpuCore)
                      .cpuUsage(cpuUsage)
                      .diskUsage(diskUsage)
                      .memoryUsageInBytes(memoryUsageInBytes)
