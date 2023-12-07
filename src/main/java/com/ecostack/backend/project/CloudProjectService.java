@@ -1,6 +1,6 @@
 package com.ecostack.backend.project;
 
-import com.ecostack.backend.cloudinstance.CloudInstanceDocument;
+import com.ecostack.backend.cloudinstance.CloudInstance;
 import com.ecostack.backend.cloudinstance.CloudInstanceRepository;
 import com.ecostack.backend.cloudinstance.CloudInstanceService;
 import com.ecostack.backend.cloudinstance.dto.CloudInstanceDto;
@@ -15,23 +15,23 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class ProjectService {
+public class CloudProjectService {
 
     private final CloudInstanceService cloudInstanceService;
-    private final ProjectRepository projectRepository;
+    private final CloudProjectRepository cloudProjectRepository;
     private final CloudInstanceRepository cloudInstanceRepository;
 
     public ProjectOverViewDto getProjectOverview(String projectId) {
-        return ProjectMapper.INSTANCE.toProjectOverviewDto(projectRepository.findById(projectId).orElseThrow());
+        return ProjectMapper.INSTANCE.toProjectOverviewDto(cloudProjectRepository.findById(projectId).orElseThrow());
     }
 
     public ProjectDashboardDto getProjectDashboard(String projectId) {
-        ProjectDocument projectDocument = projectRepository.findById(projectId).orElseThrow();
+        CloudProject cloudProject = cloudProjectRepository.findById(projectId).orElseThrow();
 
-        List<CloudInstanceDto> resourceIntensiveCloudInstances = calResourceIntensiveCloudInstances(projectDocument.getInstanceIdList());
+        List<CloudInstanceDto> resourceIntensiveCloudInstances = calResourceIntensiveCloudInstances(cloudProject.getInstanceIdList());
 
         return ProjectDashboardDto.builder()
-                .instanceCnt(projectDocument.getInstanceIdList().size())
+                .instanceCnt(cloudProject.getInstanceIdList().size())
                 //TODO : instanceDiff 계산
                 .resourceIntensiveCloudInstances(resourceIntensiveCloudInstances)
                 .build();
@@ -41,14 +41,14 @@ public class ProjectService {
         List<CloudInstanceDto> cloudInstanceDtos = new ArrayList<>();
 
          for(String instanceId : instanceIdList) {
-             CloudInstanceDocument cloudInstanceDocument = cloudInstanceRepository.findById(instanceId).orElseThrow();
+             CloudInstance cloudInstance = cloudInstanceRepository.findById(instanceId).orElseThrow();
 
-             double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getCpuUtilizationMetricIds());
-             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUsageMetricIds());
-             double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getMemoryUtilizationMetricIds());
+             double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getCpuUtilizationMetricIds());
+             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUsageMetricIds());
+             double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstance.getMemoryUtilizationMetricIds());
 
              CloudInstanceDto cloudInstanceDto = CloudInstanceDto.builder()
-                     .id(cloudInstanceDocument.getId())
+                     .id(cloudInstance.getId())
                      .cpuUsage(cpuUsage)
                      .diskUsage(diskUsage)
                      .memoryUsageInBytes(memoryUsageInBytes)

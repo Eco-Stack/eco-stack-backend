@@ -1,7 +1,8 @@
-package com.ecostack.backend.hypervisor;
+package com.ecostack.backend.project;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,20 +13,22 @@ import java.util.Set;
 
 @Builder
 @Getter
-@Document(collection = "Hypervisor")
-public class Hypervisor {
+@ToString
+@Document(collection = "CloudProject")
+public class CloudProject {
 
     @Id
     private String id;
     private String name;
     @Builder.Default
     private LocalDate createdDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
+    private String Owner;
     @Builder.Default
     private int lastCloudInstanceCnt = 0;
     @Builder.Default
     private Set<String> cloudInstanceIds = new HashSet<>();
 
     public void addToCloudInstanceIds(String cloudInstanceId) {
-        this.cloudInstanceIds.add(cloudInstanceId);
+        cloudInstanceIds.add(cloudInstanceId);
     }
 }

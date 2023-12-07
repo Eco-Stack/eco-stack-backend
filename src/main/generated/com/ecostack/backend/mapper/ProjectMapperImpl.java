@@ -1,6 +1,6 @@
 package com.ecostack.backend.mapper;
 
-import com.ecostack.backend.project.ProjectDocument;
+import com.ecostack.backend.project.CloudProject;
 import com.ecostack.backend.project.dto.ProjectOverViewDto;
 import javax.annotation.processing.Generated;
 
@@ -12,18 +12,18 @@ import javax.annotation.processing.Generated;
 public class ProjectMapperImpl implements ProjectMapper {
 
     @Override
-    public ProjectOverViewDto toProjectOverviewDto(ProjectDocument projectDocument) {
-        if ( projectDocument == null ) {
+    public ProjectOverViewDto toProjectOverviewDto(CloudProject cloudProject) {
+        if ( cloudProject == null ) {
             return null;
         }
 
         ProjectOverViewDto.ProjectOverViewDtoBuilder projectOverViewDto = ProjectOverViewDto.builder();
 
-        projectOverViewDto.id( projectDocument.getId() );
-        projectOverViewDto.name( projectDocument.getName() );
-        projectOverViewDto.createdDate( projectDocument.getCreatedDate() );
+        projectOverViewDto.id( cloudProject.getId() );
+        projectOverViewDto.name( cloudProject.getName() );
+        projectOverViewDto.createdDate( cloudProject.getCreatedDate() );
 
-        projectOverViewDto.instanceCnt( projectDocument.getInstanceIdList().size() );
+        projectOverViewDto.instanceCnt( cloudProject.getInstanceIdList().size() );
 
         return projectOverViewDto.build();
     }

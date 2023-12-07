@@ -1,7 +1,7 @@
 package com.ecostack.backend.repository;
 
-import com.ecostack.backend.project.ProjectDocument;
-import com.ecostack.backend.project.ProjectRepository;
+import com.ecostack.backend.project.CloudProject;
+import com.ecostack.backend.project.CloudProjectRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,24 +10,24 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import java.util.List;
 
 @DataMongoTest
-public class ProjectRepositoryTest {
+public class CloudProjectRepositoryTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    CloudProjectRepository cloudProjectRepository;
 
     @Test
     public void project를_저장한다() {
         //given when
-        ProjectDocument savedProjectDocument = projectRepository.save(getProject());
+        CloudProject savedCloudProject = cloudProjectRepository.save(getProject());
 
         //then
-        Assertions.assertThat(savedProjectDocument).isNotNull();
+        Assertions.assertThat(savedCloudProject).isNotNull();
     }
 
-    public static ProjectDocument getProject() {
+    public static CloudProject getProject() {
         List<Long> instanceIds = List.of(1L, 2L, 3L);
 
-        return ProjectDocument.builder()
+        return CloudProject.builder()
                 .name("project 1")
                 .instanceIdList(instanceIds)
                 .build();

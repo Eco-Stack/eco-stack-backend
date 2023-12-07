@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class ProjectController {
+public class CloudProjectController {
 
-    private final ProjectService projectService;
+    private final CloudProjectService cloudProjectService;
 
     @GetMapping("/v1/projects/{projectId}/overviews")
     public ResponseEntity<ProjectOverViewDto> getOverview(@PathVariable String projectId) {
-        return ResponseEntity.ok(projectService.getProjectOverview(projectId));
+        return ResponseEntity.ok(cloudProjectService.getProjectOverview(projectId));
     }
 
     @GetMapping("v1/projects/{projectId}/dashboards")
     public ResponseEntity<ProjectDashboardDto> getDashboard (@PathVariable String projectId) {
-        return ResponseEntity.ok(projectService.getProjectDashboard(projectId));
+        return ResponseEntity.ok(cloudProjectService.getProjectDashboard(projectId));
     }
 }
 
