@@ -1,4 +1,4 @@
-package com.ecostack.backend.metric.InstanceMetric;
+package com.ecostack.backend.metric.cloudinstance;
 
 import com.ecostack.backend.metric.MetricValues;
 import lombok.Builder;
@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @Getter
-@Document(collection = "InstanceMetric")
-public class InstanceMetric {
+@Document(collection = "CloudInstanceMetric")
+public class CloudInstanceMetric {
 
     @Id
     private String id;

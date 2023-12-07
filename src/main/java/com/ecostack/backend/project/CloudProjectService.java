@@ -8,12 +8,14 @@ import com.ecostack.backend.mapper.ProjectMapper;
 import com.ecostack.backend.project.dto.ProjectDashboardDto;
 import com.ecostack.backend.project.dto.ProjectOverViewDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CloudProjectService {
@@ -28,7 +30,6 @@ public class CloudProjectService {
 
     public ProjectDashboardDto getProjectDashboard(String projectId) {
         CloudProject cloudProject = cloudProjectRepository.findById(projectId).orElseThrow();
-
         List<CloudInstanceDto> resourceIntensiveCloudInstances = calResourceIntensiveCloudInstances(cloudProject.getCloudInstanceIds());
 
         return ProjectDashboardDto.builder()
@@ -42,16 +43,17 @@ public class CloudProjectService {
         List<CloudInstanceDto> cloudInstanceDtos = new ArrayList<>();
 
          for(String instanceId : instanceIdList) {
+
              CloudInstance cloudInstance = cloudInstanceRepository.findById(instanceId).orElseThrow();
-
+             log.info(cloudInstance.toString());
              double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getCpuUtilizationMetricIds());
-             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUtilizationMetricIds());
+//             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUtilizationMetricIds());
              double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstance.getMemoryUtilizationMetricIds());
-
+//
              CloudInstanceDto cloudInstanceDto = CloudInstanceDto.builder()
                      .id(cloudInstance.getId())
                      .cpuUsage(cpuUsage)
-                     .diskUsage(diskUsage)
+//                     .diskUsage(diskUsage)
                      .memoryUsageInBytes(memoryUsageInBytes)
                      .build();
 

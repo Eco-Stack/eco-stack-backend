@@ -13,13 +13,13 @@ import java.util.List;
 public class MetricValues {
 
     @Builder.Default
-    private List<MetricValue> metricValueValues = new ArrayList<>();
+    private List<MetricValue> metricValues = new ArrayList<>();
 
     public double getSum() {
-        return metricValueValues.stream().mapToDouble(MetricValue::getValue).sum();
+        return metricValues.stream().mapToDouble(MetricValue::getValue).sum();
     }
 
     public double getAverage() {
-        return getSum()/ metricValueValues.size();
+        return getSum()/ metricValues.size();
     }
 }
