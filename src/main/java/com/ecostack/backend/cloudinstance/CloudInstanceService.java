@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -20,7 +21,7 @@ public class CloudInstanceService {
         return null;
     }
 
-    public double calMetricsAverage(List<String> metricIds) {
+    public double calMetricsAverage(Set<String> metricIds) {
 
         double metricsAverage = 0;
 

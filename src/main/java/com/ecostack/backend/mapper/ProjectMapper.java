@@ -11,6 +11,6 @@ public interface ProjectMapper {
 
     ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
 
-    @Mapping(expression = "java(projectDocument.getInstanceIdList().size())", target = "instanceCnt")
+    @Mapping(expression = "java(cloudProject.getCloudInstanceIds().size())", target = "instanceCnt")
     ProjectOverViewDto toProjectOverviewDto(CloudProject cloudProject);
 }

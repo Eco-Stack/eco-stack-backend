@@ -78,7 +78,7 @@ public class HypervisorService {
 
         return  hypervisor.getCloudInstanceIds().stream()
                 .map(cloudInstanceId -> cloudInstanceRepository.findById(cloudInstanceId).orElseThrow())
-                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUsageMetricIds()))
+                .mapToDouble(cloudInstanceDocument -> cloudInstanceService.calMetricsAverage(cloudInstanceDocument.getDiskUtilizationMetricIds()))
                 .average()
                 .orElse(0);
     }

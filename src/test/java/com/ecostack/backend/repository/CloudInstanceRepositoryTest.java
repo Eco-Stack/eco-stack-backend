@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import java.util.List;
+import java.util.Set;
 
 @DataMongoTest
 public class CloudInstanceRepositoryTest {
@@ -22,15 +23,14 @@ public class CloudInstanceRepositoryTest {
 
         //then
         Assertions.assertThat(savedInstanceDocument).isNotNull();
-        Assertions.assertThat(savedInstanceDocument.getCpuMetricIds().size()).isEqualTo(3);
+        Assertions.assertThat(savedInstanceDocument.getCpuUtilizationMetricIds().size()).isEqualTo(3);
     }
 
     public static CloudInstance getInstance() {
 
         return CloudInstance.builder()
-                .cpuMetricIds(List.of(1L, 2L, 3L))
-                .memoryMetricIds(List.of(1L, 2L))
-                .networkMetricIds(List.of(1L, 2L, 3L, 4L))
+                .cpuUtilizationMetricIds(Set.of("1L", "2L", "3L"))
+                .memoryUtilizationMetricIds(Set.of("1L", "2L"))
                 .build();
     }
 }

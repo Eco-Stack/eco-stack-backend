@@ -8,9 +8,9 @@ import java.time.LocalDate;
 @Builder
 @Getter
 public class ProjectOverViewDto {
-    String id;
-    String name;
-    int instanceCnt;
-    LocalDate createdDate;
-    String Owner;
+    private String id;
+    private String name;
+    private int instanceCnt;
+    private LocalDate createdDate;
+    private String owner;
 }

@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-11T10:31:22+0900",
+    date = "2023-12-07T14:59:49+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17 (Oracle Corporation)"
 )
 public class ProjectMapperImpl implements ProjectMapper {
@@ -21,9 +21,10 @@ public class ProjectMapperImpl implements ProjectMapper {
 
         projectOverViewDto.id( cloudProject.getId() );
         projectOverViewDto.name( cloudProject.getName() );
+        projectOverViewDto.lastCloudInstanceCnt( cloudProject.getLastCloudInstanceCnt() );
         projectOverViewDto.createdDate( cloudProject.getCreatedDate() );
-
-        projectOverViewDto.instanceCnt( cloudProject.getInstanceIdList().size() );
+        projectOverViewDto.owner(cloudProject.getOwner());
+        projectOverViewDto.instanceCnt( cloudProject.getCloudInstanceIds().size() );
 
         return projectOverViewDto.build();
     }

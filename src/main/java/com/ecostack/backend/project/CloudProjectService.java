@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -28,23 +29,23 @@ public class CloudProjectService {
     public ProjectDashboardDto getProjectDashboard(String projectId) {
         CloudProject cloudProject = cloudProjectRepository.findById(projectId).orElseThrow();
 
-        List<CloudInstanceDto> resourceIntensiveCloudInstances = calResourceIntensiveCloudInstances(cloudProject.getInstanceIdList());
+        List<CloudInstanceDto> resourceIntensiveCloudInstances = calResourceIntensiveCloudInstances(cloudProject.getCloudInstanceIds());
 
         return ProjectDashboardDto.builder()
-                .instanceCnt(cloudProject.getInstanceIdList().size())
+                .instanceCnt(cloudProject.getCloudInstanceIds().size())
                 //TODO : instanceDiff 계산
                 .resourceIntensiveCloudInstances(resourceIntensiveCloudInstances)
                 .build();
     }
 
-    public List<CloudInstanceDto> calResourceIntensiveCloudInstances(List<String> instanceIdList) {
+    public List<CloudInstanceDto> calResourceIntensiveCloudInstances(Set<String> instanceIdList) {
         List<CloudInstanceDto> cloudInstanceDtos = new ArrayList<>();
 
          for(String instanceId : instanceIdList) {
              CloudInstance cloudInstance = cloudInstanceRepository.findById(instanceId).orElseThrow();
 
              double cpuUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getCpuUtilizationMetricIds());
-             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUsageMetricIds());
+             double diskUsage = cloudInstanceService.calMetricsAverage(cloudInstance.getDiskUtilizationMetricIds());
              double memoryUsageInBytes = cloudInstanceService.calMetricsAverage(cloudInstance.getMemoryUtilizationMetricIds());
 
              CloudInstanceDto cloudInstanceDto = CloudInstanceDto.builder()

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import java.util.List;
+import java.util.Set;
 
 @DataMongoTest
 public class CloudProjectRepositoryTest {
@@ -25,11 +26,11 @@ public class CloudProjectRepositoryTest {
     }
 
     public static CloudProject getProject() {
-        List<Long> instanceIds = List.of(1L, 2L, 3L);
+        Set<String> instanceIds = Set.of("1L", "2L", "3L");
 
         return CloudProject.builder()
                 .name("project 1")
-                .instanceIdList(instanceIds)
+                .cloudInstanceIds(instanceIds)
                 .build();
     }
 

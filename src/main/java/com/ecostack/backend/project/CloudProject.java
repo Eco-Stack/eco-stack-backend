@@ -22,7 +22,7 @@ public class CloudProject {
     private String name;
     @Builder.Default
     private LocalDate createdDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
-    private String Owner;
+    private String owner;
     @Builder.Default
     private int lastCloudInstanceCnt = 0;
     @Builder.Default
