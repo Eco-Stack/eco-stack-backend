@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CloudInstanceController {
 
     private final CloudInstanceService cloudInstanceService;

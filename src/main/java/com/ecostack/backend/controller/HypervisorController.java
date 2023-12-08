@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class HypervisorController {
 
     private final HypervisorService hypervisorService;
