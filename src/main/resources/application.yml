@@ -11,8 +11,8 @@
 spring:
   data:
     mongodb:
-#      uri : mongodb://localhost:27017/eco_stack
-      uri: mongodb://133.186.216.34:27017/eco_stack
+      uri : mongodb://localhost:27017/eco_stack
+ #     uri: mongodb://133.186.216.34:27017/eco_stack
 
 server:
   port: 8080
