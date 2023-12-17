@@ -152,7 +152,8 @@ public class CloudProjectService {
 
             mostResourceUsingProjects.add(cloudProjectResourceAvgDto);
         }
-        mostResourceUsingProjects.sort(Comparator.comparing(CloudProjectResourceAvgDto::getCpuUtilization).reversed());
+        mostResourceUsingProjects.sort(Comparator.comparing(CloudProjectResourceAvgDto::getCpuUtilization).reversed()
+                .thenComparing(CloudProjectResourceAvgDto::getMemoryUtilization).reversed());
 
         return mostResourceUsingProjects.subList(0, Math.min(mostResourceUsingProjects.size(), MAX_PROJECTS_TO_SHOW));
     }
