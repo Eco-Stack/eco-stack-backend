@@ -34,6 +34,7 @@ public class CloudProjectService {
         return CloudProjectDashboardDto.builder()
                 .instanceCnt(cloudProject.getCloudInstanceIds().size())
                 //TODO : instanceDiff 계산
+                .instanceDiff(cloudProject.getLastCloudInstanceCnt())
                 .resourceIntensiveCloudInstances(resourceIntensiveCloudInstances)
                 .build();
     }
@@ -43,14 +44,59 @@ public class CloudProjectService {
         List<CloudProjectMetricDto> mostInstanceCntProject = calMostInstanceCntProjects(cloudProjects);
 
         //TODO : 인스턴스 증가 부분 추가
+        List<CloudProjectMetricDto> mostInstanceIncreaseProject = calMostInstanceIncreaseProject(cloudProjects);
+
         //TODO : 인스턴스 감소 부분 추가
+        List<CloudProjectMetricDto> mostInstanceDecreaseProject = calMostInstanceDecreaseProject(cloudProjects);
 
         List<CloudProjectResourceAvgDto> mostResourceUsingProject = calMostResourceUsingProjects(cloudProjects);
 
         return CloudProjectOutlineDto.builder()
                 .mostInstanceCntProject(mostInstanceCntProject)
+                .mostInstanceIncreaseProject(mostInstanceIncreaseProject)
+                .mostInstanceDecreaseProject(mostInstanceDecreaseProject)
                 .mostResourceUsingProject(mostResourceUsingProject)
                 .build();
+    }
+
+    public List<CloudProjectMetricDto> calMostInstanceIncreaseProject(List<CloudProject> cloudProjects) {
+        List<CloudProjectMetricDto> cloudProjectMetricDtos = new ArrayList<>();
+
+        for(CloudProject cloudProject : cloudProjects) {
+            if(cloudProject.getLastCloudInstanceCnt() >= 0) {
+                CloudProjectMetricDto cloudProjectMetricDto = CloudProjectMetricDto.builder()
+                        .id(cloudProject.getId())
+                        .name(cloudProject.getName())
+                        .value(cloudProject.getLastCloudInstanceCnt())
+                        .build();
+
+                cloudProjectMetricDtos.add(cloudProjectMetricDto);
+            }
+        }
+
+        cloudProjectMetricDtos.sort(Comparator.comparing(CloudProjectMetricDto::getValue).reversed());
+
+        return cloudProjectMetricDtos;
+    }
+
+    public List<CloudProjectMetricDto> calMostInstanceDecreaseProject(List<CloudProject> cloudProjects) {
+        List<CloudProjectMetricDto> cloudProjectMetricDtos = new ArrayList<>();
+
+        for(CloudProject cloudProject : cloudProjects) {
+            if(cloudProject.getLastCloudInstanceCnt() <= 0) {
+                CloudProjectMetricDto cloudProjectMetricDto = CloudProjectMetricDto.builder()
+                        .id(cloudProject.getId())
+                        .name(cloudProject.getName())
+                        .value(cloudProject.getLastCloudInstanceCnt())
+                        .build();
+
+                cloudProjectMetricDtos.add(cloudProjectMetricDto);
+            }
+        }
+
+        cloudProjectMetricDtos.sort(Comparator.comparing(CloudProjectMetricDto::getValue));
+
+        return cloudProjectMetricDtos;
     }
 
     public List<CloudProjectMetricDto> calMostInstanceCntProjects(List<CloudProject> cloudProjects) {
