@@ -1,14 +1,11 @@
 spring:
-  datasource:
-    url: jdbc:mariadb://localhost:3308/eco_stack?characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: org.mariadb.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
   data:
     mongodb:
       uri: mongodb://localhost:27017/eco_stack
+jwt:
+  header: Authorization
+  secret: 7J206rKD7J2A7Iuc7YGs66as7YKk7J6F64uI64uk7J207KCV64+E6ri47J2066m066eM7KGx7ZWY7Iuc64KY7JqUP+ygnOuwnOyekOqzoOyLtuyWtOyalA==
+  token-validity-in-seconds: 86400
+
 server:
   port: 8080
